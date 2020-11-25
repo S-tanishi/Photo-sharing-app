@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//APIのURL以外のリクエストに関してはindexテンプレートを返す
+//画面遷移はフロントエンドのVueRouterが制御
+Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
