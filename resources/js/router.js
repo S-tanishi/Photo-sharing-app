@@ -19,6 +19,11 @@ const routes = [
         path: 'login'
     }
 ]
+// URL にハッシュ # がつくため、デフォルト設定からhistoryモードに変更
+const router = new VueRouter({
+    mode: 'history',
+    routes
+})
 
 // VueRouterインスタンスをエクスポートする
 // app.jsでインポートするため

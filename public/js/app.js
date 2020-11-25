@@ -35110,7 +35110,12 @@ var routes = [{
   component: _pages_PhotoList_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
   path: 'login'
-}]; // VueRouterインスタンスをエクスポートする
+}]; // URL にハッシュ # がつくため、デフォルト設定からhistoryモードに変更
+
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  mode: 'history',
+  routes: routes
+}); // VueRouterインスタンスをエクスポートする
 // app.jsでインポートするため
 
 /* harmony default export */ __webpack_exports__["default"] = (router);
