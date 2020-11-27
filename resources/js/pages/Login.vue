@@ -10,7 +10,8 @@
               @click="tab =2">Register
             </li>
         </ul>
-        {{ tab }}
+        <div class="panel" v-show="tab === 1">Login Form</div>
+        <div class="panel" v-show="tab === 2">Register Form</div>
     </div>              
 </template>
 
