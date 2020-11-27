@@ -36568,7 +36568,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var state = {};
+var state = {
+  user: null
+};
 var getters = {};
 var mutations = {};
 var actions = {};
