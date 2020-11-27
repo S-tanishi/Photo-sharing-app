@@ -1961,6 +1961,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -19661,6 +19663,7 @@ var render = function() {
         "li",
         {
           staticClass: "tab__item",
+          class: { "tab__item--active": _vm.tab === 1 },
           on: {
             click: function($event) {
               _vm.tab = 1
@@ -19674,6 +19677,7 @@ var render = function() {
         "li",
         {
           staticClass: "tab__item",
+          class: { "tab__item--active": _vm.tab === 2 },
           on: {
             click: function($event) {
               _vm.tab = 2
