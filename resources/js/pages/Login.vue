@@ -12,8 +12,21 @@
               @click="tab =2">Register
             </li>
         </ul>
-        <div class="panel" v-show="tab === 1">Login Form</div>
-        <div class="panel" v-show="tab === 2">Register Form</div>
+        <!-- login-form -->
+        <div class="panel" v-show="tab === 1">
+            <form class="form">
+                <label for="login-email">Email</label>
+                <input type="text" class="form__item" id="login-email">
+
+                <label for="login-password">Password</label>
+                <input type="password" class="form__item" id="login-password">
+
+                <div class="form__button">
+                    <button type="submit" class="button button--inverse">
+                </div>
+            </form>
+            
+        <div class="panel" v-show="tab === 2">Register Form</div>login</button>
     </div>              
 </template>
 
