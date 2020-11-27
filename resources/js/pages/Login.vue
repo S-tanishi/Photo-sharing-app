@@ -22,7 +22,7 @@
                 <input type="password" class="form__item" id="login-password">
 
                 <div class="form__button">
-                    <button type="submit" class="button button--inverse">
+                    <button type="submit" class="button button--inverse">login</button>
                 </div>
             </form>
             
@@ -34,7 +34,11 @@
 export default {
     data () {
         return {
-            tab:1
+            tab:1,
+            loginForm: {
+                email: '',
+                password: ''
+            },
         }
     }
 }
