@@ -1985,6 +1985,11 @@ __webpack_require__.r(__webpack_exports__);
         password: ''
       }
     };
+  },
+  methods: {
+    login: function login() {
+      console.log(this.loginForm);
+    }
   }
 });
 
