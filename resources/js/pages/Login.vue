@@ -54,11 +54,20 @@ export default {
                 email: '',
                 password: ''
             },
+            registerForm: {
+                name: '',
+                email: '',
+                password: '',
+                password_confirmation: ''
+            }
         }
     },
     methods: {
         login () {
             console.log(this.loginForm)
+        },
+        register () {
+            console.log(this.registerForm)
         }
     }
 }

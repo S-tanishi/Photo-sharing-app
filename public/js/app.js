@@ -1998,12 +1998,21 @@ __webpack_require__.r(__webpack_exports__);
       loginForm: {
         email: '',
         password: ''
+      },
+      registerForm: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
       }
     };
   },
   methods: {
     login: function login() {
       console.log(this.loginForm);
+    },
+    register: function register() {
+      console.log(this.registerForm);
     }
   }
 });
