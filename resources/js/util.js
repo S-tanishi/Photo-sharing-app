@@ -10,6 +10,7 @@ export function getCookieValue (searchKey) {
 
     let val = ''
 
+    // document.cookieによってクッキーが取得できる
     document.cookiesplit(';').forEach(cookie => {
         const [key, value] = cookie.split('=')
         if (key === searchKey) {
