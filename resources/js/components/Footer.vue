@@ -9,12 +9,17 @@
 
 <script>
 export default {
-  methods {
+  methods: {
     async logout () {
       await this.$store.dispatch('auth/logout')
 
       this.$router.push('/login')
     }
-  }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/check']
+    }
+  },
 }
 </script>
