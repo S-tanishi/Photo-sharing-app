@@ -36572,7 +36572,11 @@ var state = {
   user: null
 };
 var getters = {};
-var mutations = {};
+var mutations = {
+  せtUser: function tUser(state, user) {
+    state.user = user;
+  }
+};
 var actions = {};
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
