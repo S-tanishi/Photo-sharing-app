@@ -1,6 +1,6 @@
 <template>
     <footer class="footer">
-        <button class="button button--link">Logout</button>
+        <button class="button button--link" @click="logout">Logout</button>
         <RouteLink class="button button--link" to="/login">
           Login / Register
         </RouteLink>
