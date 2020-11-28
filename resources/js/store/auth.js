@@ -18,6 +18,7 @@ const actions = {
         const response = await axios.post('/api/register', data)
         context.commit('setUser', response.data)
     },
+    // ログイン
     async login (content, data) {
         const response = await axios.post('/api/login', data)
         context.commit('setUser', response.data)
