@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
-        <button class="button button--link" @click="logout">Logout</button>
-        <RouteLink class="button button--link" to="/login">
+        <button v-if="isLogin" class="button button--link" @click="logout">Logout</button>
+        <RouteLink v-else class="button button--link" to="/login">
           Login / Register
         </RouteLink>
     </footer>
