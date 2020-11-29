@@ -9,6 +9,8 @@ import App from './App.vue'
 
 import store from './store'
 
+const createApp = async () => {
+    await store.dispatch('auth/currentUser')
 
 new Vue({
     el: '#app',
@@ -17,3 +19,7 @@ new Vue({
     components: { App }, //ルートコンポーネントの使用を宣言する
     template: '<App />'
 })
+
+}
+
+createApp()
