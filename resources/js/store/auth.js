@@ -2,7 +2,7 @@ import Axios from "axios"
 import { OK } from '../util'
 
 const state = {
-    user: null
+    user: null,
     // API 呼び出しが成功したか失敗したかを表す
     apiStatus: null
 }
