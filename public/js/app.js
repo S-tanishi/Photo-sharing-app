@@ -1922,6 +1922,7 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 !(function webpackMissingModule() { var e = new Error("Cannot find module '.components/Navbar.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 !(function webpackMissingModule() { var e = new Error("Cannot find module '.components/Footer.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./resources/js/util.js");
 //
 //
 //
@@ -1936,12 +1937,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Navbar: !(function webpackMissingModule() { var e = new Error("Cannot find module '.components/Navbar.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
     Footer: !(function webpackMissingModule() { var e = new Error("Cannot find module '.components/Footer.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  },
+  computed: {
+    errorCode: function errorCode() {
+      return this.$store.state.error;
+    }
+  },
+  watch: {
+    errorCode: {
+      handler: function handler(val) {
+        if (val === INTERNAL_SERVER_EEROR) {
+          this.$router.push('/500');
+        }
+      }
+    },
+    immediate: true
+  },
+  $route: function $route() {
+    this.$store.commit('/error/setCode', null);
   }
 });
 
