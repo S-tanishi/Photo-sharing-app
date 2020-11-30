@@ -10,7 +10,7 @@ const getters = {
 }
 
 const mutations = {
-    せtUser (state, user) {
+    setUser (state, user) {
         state.user = user
     }
 }
