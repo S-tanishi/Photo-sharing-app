@@ -2026,6 +2026,11 @@ __webpack_require__.r(__webpack_exports__);
     register: function register() {
       console.log(this.registerForm);
     }
+  },
+  computed: {
+    apiStatus: function apiStatus() {
+      return this.$store.state.auth.apiStatus;
+    }
   }
 });
 

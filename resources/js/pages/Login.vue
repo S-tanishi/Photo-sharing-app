@@ -69,6 +69,11 @@ export default {
         register () {
             console.log(this.registerForm)
         }
-    }
+    },
+    computed: {
+        apiStatus () {
+            return this.$store.state.auth.apiStatus
+        }
+    },    
 }
 </script>
