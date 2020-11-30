@@ -14,6 +14,10 @@ const getters = {
 const mutations = {
     setUser (state, user) {
         state.user = user
+        // ステートを更新するため
+        setApiStatus (state, state) {
+            state.apiStatus = status
+        }    
     }
 }
 
