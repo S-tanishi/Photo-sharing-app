@@ -74,6 +74,15 @@ export default {
         apiStatus () {
             return this.$store.state.auth.apiStatus
         }
-    },    
+    },
+    async login () {
+        //authストアのloginアクションを呼び出す
+        await this.$store.dispatch('auth/login', this.loginForm)
+
+        if (this.apiStatus) {
+            // トップページに移動する
+            this.$router.push('/')
+        }
+    }    
 }
 </script>
