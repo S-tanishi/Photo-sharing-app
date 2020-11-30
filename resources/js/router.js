@@ -19,7 +19,7 @@ const routes = [
     },
     {
         path: 'login'
-    }
+    },
     {
         path: '/500',
         component: SystemError
