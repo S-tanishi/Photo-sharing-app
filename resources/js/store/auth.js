@@ -14,11 +14,11 @@ const getters = {
 const mutations = {
     setUser (state, user) {
         state.user = user
-        // ステートを更新するため
-        setApiStatus (state, state) {
-            state.apiStatus = status
-        }    
-    }
+    },
+    // ステートを更新するための
+    setApiStatus (state, state) {
+        state.apiStatus = status
+    }    
 }
 
 const actions = {
