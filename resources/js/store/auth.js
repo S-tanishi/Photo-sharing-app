@@ -30,8 +30,22 @@ const actions = {
     },
     // ログイン
     async login (content, data) {
+        // 最初はnull
+        context.commit('setApiStatus', null)
+        // 通信エラーの取得
         const response = await axios.post('/api/login', data)
-        context.commit('setUser', response.data)
+          .catch(err => err.response || err)
+        // 成功したらtrue(通信ステータスの更新)
+        if (response.status === OK) {
+          context.commit('setApiStatus' true)
+          context.commit('setUser', response.data)
+          return false
+        }
+        // 失敗ならfalse
+        context.commit('setApiStatus', false)
+        // 別モジュールのミューテーションを呼び出す
+        context.commit('error/setCode', response.status, { root: true})
+    
     },
     // ログアウト
     async logout (context) {
@@ -45,21 +59,6 @@ const actions = {
         context.commit('setUser', user)
         
     },
-    // 
-    async login (context, data) {
-        context.commit('setApiStatus', null)
-        const response = await axios.post('/api/login' data)
-          .catch(err => err.response || err)
-
-        if (response.status === OK) {
-            context.commit('setApiStatus' true)
-            context.commit('setUser', response.data)
-            return false
-        }
-        
-        context.commit('setApiStatus', false)
-        context.commit('error/setCode', response.status, { root: true})
-    }
 }
 
 export default {
