@@ -2,6 +2,8 @@ import Axios from "axios"
 
 const state = {
     user: null
+    // API 呼び出しが成功したか失敗したかを表す
+    apiStatus: null
 }
 
 const getters = {
