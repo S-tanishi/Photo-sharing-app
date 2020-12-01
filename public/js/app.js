@@ -37282,7 +37282,11 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // Ajaxリクエストであることを示すヘッダーを付与する
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.interceptors.request.use(function (config) {
+window.axios.interceptors.request.use(function (response) {
+  return response;
+}, function (error) {
+  return error.response || error;
+}, function (config) {
   // クッキーからトークンを取り出しヘッダーNI付与する
   config.headers['X-XSRF-TOKEN'] = Object(_util__WEBPACK_IMPORTED_MODULE_0__["getCookieValue"])('XSRF-TOKEN');
   return config;
