@@ -2058,6 +2058,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     apiStatus: function apiStatus() {
       return this.$store.state.auth.apiStatus;
+    },
+    loginError: function loginError() {
+      return this.$store.state.auth.loginErrorMessages;
     }
   },
   login: function login() {

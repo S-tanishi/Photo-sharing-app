@@ -73,7 +73,10 @@ export default {
     computed: {
         apiStatus () {
             return this.$store.state.auth.apiStatus
-        }
+        },
+        loginError () {
+            return this.$store.state.auth.loginErrorMessages
+        },
     },
     async login () {
         //authストアのloginアクションを呼び出す
