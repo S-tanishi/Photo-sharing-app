@@ -5,7 +5,8 @@ import { OK, UNPROCESSABLE_ENTITY } from '../util'
 const state = {
     user: null,
     // API 呼び出しが成功したか失敗したかを表す
-    apiStatus: null
+    apiStatus: null,
+    loginErrorMessage: null,
 }
 
 const getters = {
