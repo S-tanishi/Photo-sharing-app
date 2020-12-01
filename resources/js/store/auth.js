@@ -6,7 +6,7 @@ const state = {
     user: null,
     // API 呼び出しが成功したか失敗したかを表す
     apiStatus: null,
-    loginErrorMessage: null,
+    loginErrorMessages: null,
 }
 
 const getters = {
@@ -21,7 +21,11 @@ const mutations = {
     // ステートを更新するための
     setApiStatus (state, state) {
         state.apiStatus = status
-    }    
+    },
+    // バリデーションのための
+    setLoginErrorMessages (state, message) {
+        state.loginErrorMessages = messages
+    },
 }
 
 const actions = {
