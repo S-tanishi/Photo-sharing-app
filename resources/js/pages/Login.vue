@@ -78,6 +78,9 @@ export default {
         },
         register () {
             console.log(this.registerForm)
+        },
+        clearError () {
+            this.$store.commit('auth/setLoginErrorMessages', null)
         }
     },
     computed: {
@@ -87,6 +90,9 @@ export default {
         loginError () {
             return this.$store.state.auth.loginErrorMessages
         },
+    },
+    created () {
+        this/$store.commit('/auth/setLoginErrorMessages', null)
     },
     async login () {
         //authストアのloginアクションを呼び出す

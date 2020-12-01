@@ -2063,6 +2063,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     register: function register() {
       console.log(this.registerForm);
+    },
+    clearError: function clearError() {
+      this.$store.commit('auth/setLoginErrorMessages', null);
     }
   },
   computed: {
@@ -2072,6 +2075,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loginError: function loginError() {
       return this.$store.state.auth.loginErrorMessages;
     }
+  },
+  created: function created() {
+    this / $store.commit('/auth/setLoginErrorMessages', null);
   },
   login: function login() {
     var _this = this;
