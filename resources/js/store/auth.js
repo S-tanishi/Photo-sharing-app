@@ -7,6 +7,7 @@ const state = {
     // API 呼び出しが成功したか失敗したかを表す
     apiStatus: null,
     loginErrorMessages: null,
+    registerErrorMessages: null,
 }
 
 const getters = {
