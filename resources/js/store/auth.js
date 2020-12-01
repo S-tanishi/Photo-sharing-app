@@ -50,8 +50,11 @@ const actions = {
         // 失敗ならfalse
         context.commit('setApiStatus', false)
         // 別モジュールのミューテーションを呼び出す
-        context.commit('error/setCode', response.status, { root: true})
-    
+        if (response.status === UNPROCESSABLE_ENTITY) {
+            context.commit('setLoginErrorMessages', response.data.errors)
+        } else {
+            context.commit('error/setCode', response.status, { root: true})
+        }
     },
     // ログアウト
     async logout (context) {
@@ -65,6 +68,7 @@ const actions = {
         context.commit('setUser', user)
         
     },
+    
 }
 
 export default {
