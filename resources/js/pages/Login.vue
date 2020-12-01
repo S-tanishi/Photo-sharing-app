@@ -15,7 +15,7 @@
         <!-- login-form -->
         <div class="panel" v-show="tab === 1">
             <form class="form" @submit.prevent="login">
-
+                <!-- エラーメッセージ表示 -->
                 <div v-if="loginErrors" class="errors">
                   <ul v-if="loginErrors" class="errors">
                     <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
