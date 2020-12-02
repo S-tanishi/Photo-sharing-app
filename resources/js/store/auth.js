@@ -81,7 +81,11 @@ const actions = {
           context.commit('setApiStatus', true)
           context.commit('setUser', null)
           return false
-    }
+        }
+        
+        context.commit('setApiStatus', false)
+        context.commit('error/setCode', response.status, { root:true })
+    },
 
     // アプリ起動時のログインチェック
     async currentUser (context) {
