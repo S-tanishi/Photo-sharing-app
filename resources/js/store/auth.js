@@ -35,7 +35,12 @@ const mutations = {
 const actions = {
     // 会員登録
     async register (context, data) {
-        const response = await axios.post('/api/register', data)
+        context.commit('seyApiStatus', null)
+        const response = await axios.post('/api/register',data)
+        
+        if (response.status === CREATED) {
+            context.commit()
+        }
         context.commit('setUser', response.data)
     },
     // ログイン
