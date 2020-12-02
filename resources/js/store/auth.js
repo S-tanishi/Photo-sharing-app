@@ -87,11 +87,21 @@ const actions = {
         context.commit('error/setCode', response.status, { root:true })
     },
 
-    // アプリ起動時のログインチェック
+    // アプリ起動時のログインユーザーチェック
     async currentUser (context) {
-        const response = await axiou.get('/api/user')
-        const user = response,data || null
-        context.commit('setUser', user)
+        context.commit('setApiStatus', null)
+        const response = await axios.get('/api/user')
+        const user = response.data || null
+
+        if (response.status === OK) {
+            context.commit('setApiStatus', true)
+            context.commit('setUser', user)
+            return false 
+        }
+
+        context.commit('setApiStatus', true)
+        context.commit('error/setCode', response.status, { root: true })
+        
         
     },
     
