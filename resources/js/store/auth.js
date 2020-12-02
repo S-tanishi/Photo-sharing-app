@@ -27,10 +27,13 @@ const mutations = {
     setLoginErrorMessages (state, message) {
         state.loginErrorMessages = messages
     },
+    setRegisterRegister (state, messages) {
+        state.registerErrorMessages = messages
+    }
 }
 
 const actions = {
-    // 会員登録 API を呼び出す register アクション
+    // 会員登録
     async register (context, data) {
         const response = await axios.post('/api/register', data)
         context.commit('setUser', response.data)
