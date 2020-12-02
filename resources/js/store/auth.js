@@ -39,9 +39,18 @@ const actions = {
         const response = await axios.post('/api/register',data)
         
         if (response.status === CREATED) {
-            context.commit()
+            context.commit('setApiStatus', true)
+            context.commit('setUser', response.data)
+            return false
         }
-        context.commit('setUser', response.data)
+
+        context.commit('setApiStatus', false)
+        if (response.status === UNPROCESSABLE_ENTITY) {
+            context.commit('setRegisterErrorMessages', response.data.errors)
+        } else {
+            context.commit('error/setCode', response.status, { root:true })
+        }
+        
     },
     // ログイン
     async login (content, data) {
