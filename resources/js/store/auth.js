@@ -54,14 +54,12 @@ const actions = {
     },
     // ログイン
     async login (content, data) {
-        // 最初はnull
         context.commit('setApiStatus', null)
         // 通信エラーの取得
         const response = await axios.post('/api/login', data)
-          .catch(err => err.response || err)
         // 成功したらtrue(通信ステータスの更新)
         if (response.status === OK) {
-          context.commit('setApiStatus' true)
+          context.commit('setApiStatus', true)
           context.commit('setUser', response.data)
           return false
         }
@@ -76,9 +74,15 @@ const actions = {
     },
     // ログアウト
     async logout (context) {
+        context.commit('setApiStatus', null)
         const response = await axios.post('/api/logout')
-        context.commit('setUser', null)
-    },
+
+        if (response.status === OK) {
+          context.commit('setApiStatus', true)
+          context.commit('setUser', null)
+          return false
+    }
+
     // アプリ起動時のログインチェック
     async currentUser (context) {
         const response = await axiou.get('/api/user')
