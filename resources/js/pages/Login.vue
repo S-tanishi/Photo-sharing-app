@@ -79,28 +79,22 @@ export default {
     }),
 
     methods: {
-        login () {
+        async login () {
             console.log(this.loginForm)
         },
-        register () {
-            console.log(this.registerForm)
-        },
-        clearError () {
-            this.$store.commit('auth/setLoginErrorMessages', null)
-        }
-    },
-    
-    created () {
-        this/$store.commit('/auth/setLoginErrorMessages', null)
-    },
-    async login () {
-        //authストアのloginアクションを呼び出す
-        await this.$store.dispatch('auth/login', this.loginForm)
+        async register () {
+          //authストアのloginアクションを呼び出す
+          await this.$store.dispatch('auth/login', this.loginForm)
 
-        if (this.apiStatus) {
+          if (this.apiStatus) {
             // トップページに移動する
             this.$router.push('/')
+          }
+        },
+        clearError () {
+          this.$store.commit('auth/setLoginErrorMessages', null)
+          this.$store.commit('auth/setRegisterErrorMessages', null)
         }
-    }    
+    },
 }
 </script>
