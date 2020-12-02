@@ -38,6 +38,19 @@
         <!-- 会員登録フォーム -->
         <div class="panel" v-show="tab === 2">
             <form class="form" @submit.prevent="register">
+                <!-- 登録フォームのエラーメッセージ表示欄 -->
+                <div v-if="registerErrors" class="errors">
+                    <ul v-if="registerErrors.name">
+                        <li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li>
+                    </ul>
+                    <ul v-if="registerErrors.email">
+                        <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
+                    </ul>
+                    <ul v-if="registerErrors.password">
+                        <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
+                    </ul>
+                </div>
+                
                 <label for="username">Name</label>
                 <input type="text" class="form__item" id="username" v-model="registerForm.name">
                 
