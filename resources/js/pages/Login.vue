@@ -72,6 +72,12 @@ export default {
             }
         }
     },
+    computed: mapState({
+        apiStatus: state => state.auth.apiStatus,
+        loginErrors: state => state.auth.loginErrorMessages,
+        registerErrors: state => state.auth.registerErrorMessages,
+    }),
+
     methods: {
         login () {
             console.log(this.loginForm)
@@ -83,14 +89,7 @@ export default {
             this.$store.commit('auth/setLoginErrorMessages', null)
         }
     },
-    computed: {
-        apiStatus () {
-            return this.$store.state.auth.apiStatus
-        },
-        loginError () {
-            return this.$store.state.auth.loginErrorMessages
-        },
-    },
+    
     created () {
         this/$store.commit('/auth/setLoginErrorMessages', null)
     },

@@ -2057,6 +2057,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     };
   },
+  computed: mapState({
+    apiStatus: function apiStatus(state) {
+      return state.auth.apiStatus;
+    },
+    loginErrors: function loginErrors(state) {
+      return state.auth.loginErrorMessages;
+    },
+    registerErrors: function registerErrors(state) {
+      return state.auth.registerErrorMessages;
+    }
+  }),
   methods: {
     login: function login() {
       console.log(this.loginForm);
@@ -2066,14 +2077,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     clearError: function clearError() {
       this.$store.commit('auth/setLoginErrorMessages', null);
-    }
-  },
-  computed: {
-    apiStatus: function apiStatus() {
-      return this.$store.state.auth.apiStatus;
-    },
-    loginError: function loginError() {
-      return this.$store.state.auth.loginErrorMessages;
     }
   },
   created: function created() {

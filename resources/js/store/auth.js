@@ -101,8 +101,7 @@ const actions = {
 
         context.commit('setApiStatus', true)
         context.commit('error/setCode', response.status, { root: true })
-        
-        
+    
     },
     
 }
