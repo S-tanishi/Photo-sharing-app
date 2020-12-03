@@ -69,4 +69,46 @@ class PhotoSubmitApiTest extends TestCase
         // ストレージにファイルが保存されていないこと
         $this->assertEquals(0, count(Storage::cloud()->files()));
     }
+    /**
+     * @test
+     */
+    public function should_データベースエラーの場合はファイルを保存しない()
+    {
+        // 乱暴だがこれでエラーを起こす
+        Schema::drop('photos');
+
+        Storage::fake('s3');
+
+        $response = $this->activeAs($this->user)
+           ->json('POST', route('photo.create'), [
+               'photo' =>UploadedFile::fake()->image('photo.jpg'),
+           ]);
+        
+        // レスポンスが500(INTERNAL SERVER ERROR)であること
+        $response->assertStatus(500);
+
+        // ストレージにファイルが保存されていないこと
+        $this->assertEquals(0, count(Storage::cloud()->files()));
+    }
+    /**
+     * @test
+     */
+    public function should_ファイル保存エラーの場合はDBに保存しない()
+    {
+        // ストレージをモックして保存時にエラーを起こさせる
+        Storage::shouldReceive('cloud')
+           ->once()
+           ->andReturnNull();
+        
+        $response = $this->actingAs($this->user)
+           ->json('POST', route('photo.create'), [
+               'photo' => UploadedFile::fake()->image('photo.jpg')
+           ]);
+        
+        // レスポンスが500(INTERNAL SEWRVER ERROR)であること
+        $response->assertStatus(500);
+
+        // データベースに何も挿入されていないこと
+        $this->assertEmpty(Photo::all());
+    }
 }
