@@ -6,7 +6,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Photo;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facade\Storage;
+use Illuminate\Support\Facades\Schema;
+
 
 class PhotoSubmitApiTest extends TestCase
 {
@@ -43,5 +47,26 @@ class PhotoSubmitApiTest extends TestCase
 
         // DBに挿入されたファイル名のファイルがストレージに保存されていること
         Storage::cloud()->assertExists($photo->filename);
+    }
+    /** 
+     * @test
+     */
+    public function should_データベースエラーの場合はファイルを保存しない()
+    {
+        // 乱暴だがこれでDBエラーを起こす
+        Schema::drop('photos');
+
+        Storage::fake('s3');
+
+        $response = $this->actingAs($this->user)
+           ->json('POST', route('photo.create'), [
+               'photo' => UploadedFile::fake()->image('photo.jpg'),
+           ]);
+
+        // レスポンスが500(INTERNAL SERVER ERRORであること
+        $response->assertStatus(500);
+
+        // ストレージにファイルが保存されていないこと
+        $this->assertEquals(0, count(Storage::cloud()->files()));
     }
 }
