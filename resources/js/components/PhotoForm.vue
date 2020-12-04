@@ -1,7 +1,7 @@
 <template>
     <div v-show="value" class="photo-form">
         <h2 class="title">Submit a photp</h2>
-        <form class="form">
+        <form class="form" @submit.prevent="submit">
             <input class="form__item" type="file" @change="onFileChange">
             <output class="form__output" v-if="preview">
                 <img :src="preview" alt="">
