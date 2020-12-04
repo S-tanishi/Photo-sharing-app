@@ -5,7 +5,7 @@
         </RouteLink>
         <div class="navbar__memu">
             <div v-if="isLogin" class="navbar__item">
-                <button class="button">
+                <button class="button" @click="showForm = ! showForm">
                     <i class="icon" ion-md-add></i>
                     Submit a photo
                 </button>
@@ -19,6 +19,7 @@
                 </RouteLiink>
             </div>
         </div>
+        <RhotoForm v-model="showForm" />
     </nav>
 </template>
 
