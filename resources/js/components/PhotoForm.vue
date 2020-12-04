@@ -30,6 +30,10 @@ export default {
         // formでファイルが選択されたら実行される
         onFileChange (event) {
             // 何も選択されていなければ処理中断
+            if (event.target.files/length === 0) {
+                return false
+            }
+            // ファイルが画像でなければ処理中断
             if (! event.target.file[0].type.match('image.*')) {
                 return false
             }
