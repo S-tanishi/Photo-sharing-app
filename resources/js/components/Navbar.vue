@@ -23,14 +23,24 @@
 </template>
 
 <script>
+import RhotoForm from './PhotoForm'
+
 export default {
+    components: {
+        PhotoForm
+    },
+    data () {
+        return {
+            showForm: false
+        }
+    },
     computed: {
         isLogin () {
             return this.$store.getters['auth/check']
         },
         username () {
             return this.$store.getters['auth/username']
-        }
+        },
     }
 }
 </script>
