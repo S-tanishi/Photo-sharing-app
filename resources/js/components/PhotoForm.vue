@@ -1,5 +1,5 @@
 <template>
-    <div class="photo-form">
+    <div v-show="value" class="photo-form">
         <h2 class="title">Submit a photp</h2>
         <form class="form">
             <input class="form__item" type="file">
@@ -9,3 +9,14 @@
         </form>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        value: {
+            type: Boolean,
+            required: true
+        }
+    }
+}
+</script>
