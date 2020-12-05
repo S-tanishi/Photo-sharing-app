@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
 export default {
     props: {
         value: {
@@ -72,6 +73,8 @@ export default {
 
             this.reset()
             this.$emit('input', false)
+
+            this.$router.push(`/photos/${response.data.id}`)
 
         }
         
