@@ -102,6 +102,16 @@ export default {
             this.reset()
             this.$emit('input', false)
 
+            if (response.status !== CREATED) {
+                this.$store.commit('error/setCode', response.status)
+                return false
+            }
+            // message登録
+            this.$store.commit('message/setContent', {
+                content: '写真が投稿されました！',
+                timeout: 6000
+            })
+
             this.$router.push(`/photos/${response.data.id}`)
 
         }
