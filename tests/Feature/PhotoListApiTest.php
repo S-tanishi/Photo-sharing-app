@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\Photo;
+use App\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PhotoListApiTest extends TestCase
 {
