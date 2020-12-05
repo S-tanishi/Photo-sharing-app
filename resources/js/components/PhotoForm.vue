@@ -2,6 +2,13 @@
     <div v-show="value" class="photo-form">
         <h2 class="title">Submit a photp</h2>
         <form class="form" @submit.prevent="submit">
+            <!-- 写真投稿機能のエラー処理 -->
+            <div class="errors" v-if="errors">
+                <ul v-if="errors.photo">
+                    <li v-for="msg in errors.photo" :key="msg">{{ msg }}</li>
+                </ul>
+            </div>
+            
             <input class="form__item" type="file" @change="onFileChange">
             <output class="form__output" v-if="preview">
                 <img :src="preview" alt="">
