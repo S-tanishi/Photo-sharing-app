@@ -26,6 +26,7 @@ export default {
         return {
             preview: null,
             photo: null,
+            errors: null,
         }
     },
     methods: {
