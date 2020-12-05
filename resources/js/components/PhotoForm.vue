@@ -58,14 +58,23 @@ export default {
             reader.readAsDataURL(event.target.files[0])
 
             this.photo = event.target.files[0]
-            },
-            // 入力欄の値とプレビュー表示をクリアするメソッド
-            reset() {
+        },
+        // 入力欄の値とプレビュー表示をクリアするメソッド
+        reset() {
                 this.preview = ''
                 this.photo = nullthis.$el.querySeletor('input[type="file"]').value = null
                 this.$el.querySeletor('input[type="file"]').value = null
-            }
+        },
+        async submit () {
+            const formData = new FormData()
+            formData.append('photo', this.photo)
+            const response = await axios.post('/api/photos', formData)
+
+            this.reset()
+            this.$emit('input', false)
+
         }
+        
     }
 }
 </script>
