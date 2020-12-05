@@ -6,6 +6,7 @@ import PhotoList from './pages/PhotoList.vue'
 import Login from './pages/Login.vue'
 // システムエラーのルート定義を追加
 import SystemError from './pages/errors/System.vue'
+import PhotoDetail from './pages/PhotoDetail.vue'
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />こんんポーねんとなどが使用可能に
@@ -16,6 +17,11 @@ const routes = [
     {
         path: '/',
         component: PhotoList
+    },
+    {
+        path: '/photos/:id',
+        component: PhotoDetail,
+        props: true
     },
     {
         path: 'login'
