@@ -23,7 +23,8 @@ export default {
     },
     data() {
         return {
-            preview: null
+            preview: null,
+            photo: null,
         }
     },
     methods: {
@@ -55,9 +56,14 @@ export default {
             // ファイルを読み込む
             // 読み込まれたファイルはデータURL形式で受け取れる（上記onload参照）
             reader.readAsDataURL(event.target.files[0])
+
+            this.photo = event.target.files[0]
             },
+            // 入力欄の値とプレビュー表示をクリアするメソッド
             reset() {
-              this.$el.querySeletor('input[type="file"]').value = null
+                this.preview = ''
+                this.photo = nullthis.$el.querySeletor('input[type="file"]').value = null
+                this.$el.querySeletor('input[type="file"]').value = null
             }
         }
     }
