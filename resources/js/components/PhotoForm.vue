@@ -1,7 +1,12 @@
 <template>
     <div v-show="value" class="photo-form">
         <h2 class="title">Submit a photp</h2>
-        <form class="form" @submit.prevent="submit">
+        <!-- ローディング表示処理 -->
+        <div v-show="loading" class="panel">
+            <Loader>Sending your photo...</Loader>
+        </div>
+
+        <form v-show="! loading" class="form" @submit.prevent="submit">
             <!-- 写真投稿機能のエラー処理 -->
             <div class="errors" v-if="errors">
                 <ul v-if="errors.photo">
