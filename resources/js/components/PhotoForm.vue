@@ -22,7 +22,12 @@
 
 <script>
 import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
+import Loader from './Loader.vue'
+
 export default {
+    components: {
+        Loader
+    },
     props: {
         value: {
             type: Boolean,
@@ -31,6 +36,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             preview: null,
             photo: null,
             errors: null,
