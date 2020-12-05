@@ -86,9 +86,13 @@ export default {
                 this.$el.querySeletor('input[type="file"]').value = null
         },
         async submit () {
+            this.loading = true
+
             const formData = new FormData()
             formData.append('photo', this.photo)
             const response = await axios.post('/api/photos', formData)
+
+            this.loading = false
 
             if (response.status === UNPROCESSABLE_ENTITY) {
                 this.errors = response.data.errors
