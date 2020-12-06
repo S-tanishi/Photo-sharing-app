@@ -19,6 +19,7 @@
                  class="photo__action photo__action--like"
                  title="Like photo"
               >
+                 <i class="icon ion-md-heart"></i>12
               </button>
           </div>
         </RouteLink>
