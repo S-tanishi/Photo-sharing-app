@@ -31,6 +31,10 @@
                 <i class="icon ion-md-arrow-round-down"></i>
               </a>  
           </div>
+          <!-- 投稿者名 -->
+          <div class="photo__username">
+            {{ item.owner.name }}
+          </div>
         </RouteLink>
     </div>
 </template>
