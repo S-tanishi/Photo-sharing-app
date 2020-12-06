@@ -50,4 +50,12 @@ class Photo extends Model
 
         return $id;
     }
+    /**
+     * リレーションシップ - usersテーブル
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function owner() 
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id', 'users');
+    }
 }
