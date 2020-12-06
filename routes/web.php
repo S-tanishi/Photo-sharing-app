@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 //APIのURL以外のリクエストに関してはindexテンプレートを返す
 //画面遷移はフロントエンドのVueRouterが制御
 Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
+//写真ダウンロード
+Route::get('/photos/{photo}/download', 'PhotoController@download');
