@@ -14,6 +14,7 @@ class PhotoController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * 写真投稿機能
      */
@@ -51,5 +52,15 @@ class PhotoController extends Controller
         // レスポンスコードは201(CREATED)を返却する
         return response($photo, 201);
     }
+
+    /**
+     * 写真一覧
+     */
+    public function index
+    {
+        $photos = Photo::with(['owner'])
+           ->orderBy(Photo::CREATED_AT, 'desc')->paginate();
+
+        return $photos;
     }
 }
