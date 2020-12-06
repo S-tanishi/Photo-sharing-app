@@ -13,6 +13,14 @@
           :to="`/photos/${item.id}`"
           :title="`View the photo by ${item.owner.name}`"
         >
+        <!-- いいねボタン -->
+          <div class="photo__controls">
+              <button
+                 class="photo__action photo__action--like"
+                 title="Like photo"
+              >
+              </button>
+          </div>
         </RouteLink>
     </div>
 </template>
