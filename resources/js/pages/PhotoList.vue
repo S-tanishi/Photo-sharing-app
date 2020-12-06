@@ -42,6 +42,13 @@ export default {
             immediate: true
         }
         
-    }
+    },
+    props: {
+        page: {
+            type: Number,
+            required: false,
+            default: 1
+        }
+    },
 }
 </script>

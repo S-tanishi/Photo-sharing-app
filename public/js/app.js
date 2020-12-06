@@ -2333,6 +2333,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       immediate: true
     }
+  },
+  props: {
+    page: {
+      type: Number,
+      required: false,
+      "default": 1
+    }
   }
 });
 
