@@ -7,6 +7,13 @@
               :alt="`Photo by ${item.owner.name}`"
             >
         </figure>
+        <!-- マウスオーバー時のオーバーレイ -->
+        <RouteLink 
+          class="photo__overlay"
+          :to="`/photos/${item.id}`"
+          :title="`View the photo by ${item.owner.name}`"
+        >
+        </RouteLink>
     </div>
 </template>
 
