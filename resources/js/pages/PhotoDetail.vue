@@ -26,6 +26,14 @@
             </h2>
             <!-- comment投稿機能 -->
             <form @submit.prevent="addComment" class="form">
+                <!-- エラーメッセージ表示 -->
+                <div v-if="commentErrors" class="form">
+                    <div v-if="commentErrors" class="errors">
+                        <ul v-if="commentErrors.content">
+                            <li v-for="msg in commnetErrors.content" :key="msg">{{ msg }}</li>
+                        </ul>
+                    </div>
+                    
                 <textarea class="form__item" v-model="commentContent"></textarea>
                 <div class="form__button">
                     <button type="submit" class="button button--inverse">submit comment</button>
@@ -37,7 +45,7 @@
 
 <script>
 import Photo from '../components/Photo.vue'
-import { OK } from '../util'
+import { OK,CREATED, UNPROCESSABLE_ENITITY } from '../util'
 
 export default {
     props: {
@@ -51,7 +59,8 @@ export default {
         return {
             photo: null,
             fullWidth: false,
-            commentContent: ''
+            commentContent: '',
+            commentErrors: null
         }
     },
     methods: {
@@ -70,7 +79,21 @@ export default {
                 content: this.commentContent
             })
 
+            // validation error
+            if (response.status === UNPROCESSABLE_ENITITY) {
+                this.commentErrors = response.data.errors
+                return false
+            }
+
             this.commentContent = ''
+            // エラーメッセージをクリア
+            this.commentErrors = null
+
+            // その他のエラー
+            if (response.status !== CREATED) {
+                this.$store.commit('error/setCode', response.status)
+                return false
+            }
         }
     },
     watch: {

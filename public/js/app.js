@@ -2335,6 +2335,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2348,7 +2356,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       photo: null,
       fullWidth: false,
-      commentContent: ''
+      commentContent: '',
+      commentErrors: null
     };
   },
   methods: {
@@ -2403,9 +2412,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context2.sent;
-                _this2.commentContent = '';
 
-              case 4:
+                if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_2__["UNPROCESSABLE_ENITITY"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                _this2.commentErrors = response.data.errors;
+                return _context2.abrupt("return", false);
+
+              case 6:
+                _this2.commentContent = ''; // エラーメッセージをクリア
+
+                _this2.commentErrors = null; // その他のエラー
+
+                if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_2__["CREATED"])) {
+                  _context2.next = 11;
+                  break;
+                }
+
+                _this2.$store.commit('error/setCode', response.status);
+
+                return _context2.abrupt("return", false);
+
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -21197,132 +21227,8 @@ var staticRenderFns = []
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.photo
-    ? _c(
-        "div",
-        {
-          staticClass: "photo-detail",
-          class: { "photo-detail--column": _vm.fullWidth }
-        },
-        [
-          _c(
-            "figure",
-            {
-              staticClass: "photo-detail__pane photo-detail__image",
-              on: {
-                click: function($event) {
-                  _vm.fullWidth = !_vm.fullWidth
-                }
-              }
-            },
-            [
-              _c("img", { attrs: { src: _vm.photo.url, alt: "" } }),
-              _vm._v(" "),
-              _c("figcaption", [
-                _vm._v("Posted by " + _vm._s(_vm.photo.owner.name))
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "photo-detail__pane" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "button",
-                attrs: {
-                  href: "/photo/" + _vm.photo.id + "/download",
-                  title: "Download photo"
-                }
-              },
-              [
-                _c("i", { staticClass: "icon ion-md-arrow-round-down" }),
-                _vm._v("Download\n        ")
-              ]
-            ),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                staticClass: "form",
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.addComment($event)
-                  }
-                }
-              },
-              [
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.commentContent,
-                      expression: "commentContent"
-                    }
-                  ],
-                  staticClass: "form__item",
-                  domProps: { value: _vm.commentContent },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.commentContent = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(2)
-              ]
-            )
-          ])
-        ]
-      )
-    : _vm._e()
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "button button--like", attrs: { title: "Like photo" } },
-      [_c("i", { staticClass: "icon ion-md-heart" }), _vm._v("12\n        ")]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "photo-detail__title" }, [
-      _c("i", { staticClass: "icon ion-md-chatboxes" }),
-      _vm._v("Commments\n        ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form__button" }, [
-      _c(
-        "button",
-        { staticClass: "button button--inverse", attrs: { type: "submit" } },
-        [_vm._v("submit comment")]
-      )
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
