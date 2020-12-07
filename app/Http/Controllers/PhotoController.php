@@ -16,6 +16,29 @@ class PhotoController extends Controller
     }
 
     /**
+     * 写真一覧
+     */
+    public function index()
+    {
+        $photos = Photo::with(['owner'])
+           ->orderBy(Photo::CREATED_AT, 'desc')->paginate();
+
+        return $photos;
+    }
+
+    /**
+     * 写真詳細
+     * @param string
+     * @return Photo
+     */
+    public function show(string $id)
+    {
+        $photo = Photo::where('id', $id)->with(['owner'])->first();
+
+        return $photo ?? abort(404);
+    }
+    
+    /**
      * 写真投稿機能
      */
     public function create(StorePhoto $request)
@@ -51,17 +74,6 @@ class PhotoController extends Controller
         // リソースの新規作成なので
         // レスポンスコードは201(CREATED)を返却する
         return response($photo, 201);
-    }
-
-    /**
-     * 写真一覧
-     */
-    public function index()
-    {
-        $photos = Photo::with(['owner'])
-           ->orderBy(Photo::CREATED_AT, 'desc')->paginate();
-
-        return $photos;
     }
 
     /**
