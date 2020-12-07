@@ -25,7 +25,7 @@
                 <i class="icon ion-md-chatboxes"></i>Commments
             </h2>
             <!-- comment投稿機能 -->
-            <form @submit.prevent="addComment" class="form">
+            <form v-if="isLogin" @submit="addComment" class="form">
                 <!-- エラーメッセージ表示 -->
                 <div v-if="commentErrors" class="form">
                     <div v-if="commentErrors" class="errors">
@@ -61,6 +61,11 @@ export default {
             fullWidth: false,
             commentContent: '',
             commentErrors: null
+        }
+    },
+    computed: {
+        isLogin () {
+            return this.$store.getters['auth/check']
         }
     },
     methods: {

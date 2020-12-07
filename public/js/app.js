@@ -2360,6 +2360,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       commentErrors: null
     };
   },
+  computed: {
+    isLogin: function isLogin() {
+      return this.$store.getters['auth/check'];
+    }
+  },
   methods: {
     fetchPhoto: function fetchPhoto() {
       var _this = this;
