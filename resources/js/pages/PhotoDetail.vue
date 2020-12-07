@@ -24,16 +24,25 @@
             <h2 class="photo-detail__title">
                 <i class="icon ion-md-chatboxes"></i>Commments
             </h2>
+            <!-- comment投稿機能 -->
+            <form @submit.prevent="addComment" class="form">
+                <textarea class="form__item" v-model="commentContent"></textarea>
+                <div class="form__button">
+                    <button type="submit" class="button button--inverse">submit comment</button>
+                </div>
+            </form>
         </div>
     </div>
 </template>
 
 <script>
+import Photo from '../components/Photo.vue'
 import { OK } from '../util'
 
 export default {
     props: {
-        id: {
+        
+        Photoid: {
             type: String,
             required: true
         }
@@ -41,7 +50,8 @@ export default {
     data () {
         return {
             photo: null,
-            fullWidth: false
+            fullWidth: false,
+            commentContent: ''
         }
     },
     methods: {
@@ -54,6 +64,13 @@ export default {
             }
 
             this.photo = response.data
+        },
+        async addComment () {
+            const response = await axios.post(`/api/photo/${this.id}/comments`, {
+                content: this.commentContent
+            })
+
+            this.commentContent = ''
         }
     },
     watch: {
