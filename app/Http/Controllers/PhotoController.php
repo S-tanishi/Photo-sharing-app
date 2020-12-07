@@ -29,12 +29,12 @@ class PhotoController extends Controller
 
     /**
      * 写真詳細
-     * @param string
+     * @param string $id
      * @return Photo
      */
     public function show(string $id)
     {
-        $photo = Photo::where('id', $id)->with(['owner'])->first();
+        $photo = Photo::where('id', $id)->with(['owner', 'comment.author'])->first();
 
         return $photo ?? abort(404);
     }
