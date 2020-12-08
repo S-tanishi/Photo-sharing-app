@@ -26,3 +26,4 @@ export const CREATED = 201
 export const INRERNAL_SERVER_ERROR = 500
 export const UNPROCESSABLE_ENITITY = 422
 export const UNAUTHORIZED = 419
+export const NOT_FOUND = 404
