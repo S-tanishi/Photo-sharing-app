@@ -12,13 +12,19 @@ class Photo extends Model
     /** プライマリキーの型 */
     protected $keyType = 'string';
 
+    /** JSONに含めるアクセサ */
+    protected $appends = [
+        'url', 'like_count', 'liked_by_user',
+    ];
+    
     /** JSONに含める属性 */
     protected $appends = [
         'url',
     ];
     /** JSONに含める属性 */
     protected $visible = [
-        'id', 'owner', 'url', 'comments'
+        'id', 'owner', 'url', 'comments',
+        'likes_count', 'liked_by_user',
     ];
 
     /** IDの桁数 */
