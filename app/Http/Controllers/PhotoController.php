@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PhotoController extends Controller
 {
