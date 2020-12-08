@@ -2101,12 +2101,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
       type: Object,
       required: true
     }
+  },
+  like: function like() {
+    this.$emit('like', {
+      id: this.item.id,
+      liked: this.item.liked_by_user
+    });
   }
 });
 
@@ -2541,6 +2549,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -2615,6 +2624,63 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }))();
       },
       immediate: true
+    },
+    onLikeClick: function onLikeClick(_ref) {
+      var id = _ref.id,
+          liked = _ref.liked;
+
+      if (!this.$store.getters['auth/check']) {
+        alert('いいね機能を使うにはログインしてください');
+        return false;
+      }
+
+      if (liked) {
+        this.unlike(id);
+      } else {
+        this.like(id);
+      }
+    },
+    like: function like(id) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.put("/api/photos/".concat(id, "/like"));
+
+              case 2:
+                response = _context3.sent;
+
+                if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                _this3.$store.commit('error/setCode', response.status);
+
+                return _context3.abrupt("return", false);
+
+              case 6:
+                _this3.photos = _this3.photos.map(function (photo) {
+                  if (photo.id === response.data.photo_id) {
+                    photo.likes_count += 1;
+                    photo.liked_by_user = true;
+                  }
+
+                  return photo;
+                });
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   },
   props: {
@@ -21191,11 +21257,18 @@ var render = function() {
               "button",
               {
                 staticClass: "photo__action photo__action--like",
-                attrs: { title: "Like photo" }
+                class: { "photo__action--liked": _vm.item.liked_by_user },
+                attrs: { title: "Like photo" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.like($event)
+                  }
+                }
               },
               [
                 _c("i", { staticClass: "icon ion-md-heart" }),
-                _vm._v("12\n          ")
+                _vm._v(_vm._s(_vm.item.likes_count) + "\n          ")
               ]
             ),
             _vm._v(" "),
@@ -21295,7 +21368,8 @@ var render = function() {
           return _c("Photo", {
             key: photo.id,
             staticClass: "grid__item",
-            attrs: { item: photo }
+            attrs: { item: photo },
+            on: { like: _vm.onLikeClick }
           })
         }),
         1
@@ -38579,10 +38653,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*!************************************!*\
   !*** ./resources/js/store/auth.js ***!
   \************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/snail/another/docker-laravel/backend/resources/js/store/auth.js: Identifier 'OK' has already been declared (3:9)\n\n\u001b[0m \u001b[90m 1 | \u001b[39m\u001b[36mimport\u001b[39m \u001b[33mAxios\u001b[39m from \u001b[32m\"axios\"\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 2 | \u001b[39m\u001b[36mimport\u001b[39m { \u001b[33mOK\u001b[39m } from \u001b[32m'../util'\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 3 | \u001b[39m\u001b[36mimport\u001b[39m { \u001b[33mOK\u001b[39m\u001b[33m,\u001b[39m \u001b[33mUNPROCESSABLE_ENTITY\u001b[39m } from \u001b[32m'../util'\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m   | \u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 4 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 5 | \u001b[39m\u001b[36mconst\u001b[39m state \u001b[33m=\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 6 | \u001b[39m    user\u001b[33m:\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n    at Parser._raise (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:748:17)\n    at Parser.raiseWithData (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:741:17)\n    at Parser.raise (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:735:17)\n    at ScopeHandler.checkRedeclarationInScope (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:4915:12)\n    at ScopeHandler.declareName (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:4881:12)\n    at Parser.checkLVal (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:9562:24)\n    at Parser.parseImportSpecifier (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:13270:10)\n    at Parser.parseNamedImportSpecifiers (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:13247:12)\n    at Parser.parseImport (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:13078:39)\n    at Parser.parseStatementContent (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:11750:27)\n    at Parser.parseStatement (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:11650:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:12232:25)\n    at Parser.parseBlockBody (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:12218:10)\n    at Parser.parseTopLevel (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:11581:10)\n    at Parser.parse (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:13392:10)\n    at parse (/Users/snail/another/docker-laravel/backend/node_modules/@babel/parser/lib/index.js:13445:38)\n    at parser (/Users/snail/another/docker-laravel/backend/node_modules/@babel/core/lib/parser/index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Users/snail/another/docker-laravel/backend/node_modules/@babel/core/lib/transformation/normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (/Users/snail/another/docker-laravel/backend/node_modules/@babel/core/lib/transformation/index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (/Users/snail/another/docker-laravel/backend/node_modules/@babel/core/lib/transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (/Users/snail/another/docker-laravel/backend/node_modules/gensync/index.js:261:32)\n    at /Users/snail/another/docker-laravel/backend/node_modules/gensync/index.js:273:13\n    at async.call.result.err.err (/Users/snail/another/docker-laravel/backend/node_modules/gensync/index.js:223:11)");
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /app/resources/js/store/auth.js: Identifier 'OK' has already been declared (3:9)\n\n\u001b[0m \u001b[90m 1 | \u001b[39m\u001b[36mimport\u001b[39m \u001b[33mAxios\u001b[39m from \u001b[32m\"axios\"\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 2 | \u001b[39m\u001b[36mimport\u001b[39m { \u001b[33mOK\u001b[39m } from \u001b[32m'../util'\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 3 | \u001b[39m\u001b[36mimport\u001b[39m { \u001b[33mOK\u001b[39m\u001b[33m,\u001b[39m \u001b[33mUNPROCESSABLE_ENTITY\u001b[39m } from \u001b[32m'../util'\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m   | \u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 4 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 5 | \u001b[39m\u001b[36mconst\u001b[39m state \u001b[33m=\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 6 | \u001b[39m    user\u001b[33m:\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n    at Parser._raise (/app/node_modules/@babel/parser/lib/index.js:748:17)\n    at Parser.raiseWithData (/app/node_modules/@babel/parser/lib/index.js:741:17)\n    at Parser.raise (/app/node_modules/@babel/parser/lib/index.js:735:17)\n    at ScopeHandler.checkRedeclarationInScope (/app/node_modules/@babel/parser/lib/index.js:4915:12)\n    at ScopeHandler.declareName (/app/node_modules/@babel/parser/lib/index.js:4881:12)\n    at Parser.checkLVal (/app/node_modules/@babel/parser/lib/index.js:9562:24)\n    at Parser.parseImportSpecifier (/app/node_modules/@babel/parser/lib/index.js:13270:10)\n    at Parser.parseNamedImportSpecifiers (/app/node_modules/@babel/parser/lib/index.js:13247:12)\n    at Parser.parseImport (/app/node_modules/@babel/parser/lib/index.js:13078:39)\n    at Parser.parseStatementContent (/app/node_modules/@babel/parser/lib/index.js:11750:27)\n    at Parser.parseStatement (/app/node_modules/@babel/parser/lib/index.js:11650:17)\n    at Parser.parseBlockOrModuleBlockBody (/app/node_modules/@babel/parser/lib/index.js:12232:25)\n    at Parser.parseBlockBody (/app/node_modules/@babel/parser/lib/index.js:12218:10)\n    at Parser.parseTopLevel (/app/node_modules/@babel/parser/lib/index.js:11581:10)\n    at Parser.parse (/app/node_modules/@babel/parser/lib/index.js:13392:10)\n    at parse (/app/node_modules/@babel/parser/lib/index.js:13445:38)\n    at parser (/app/node_modules/@babel/core/lib/parser/index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/app/node_modules/@babel/core/lib/transformation/normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (/app/node_modules/@babel/core/lib/transformation/index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (/app/node_modules/@babel/core/lib/transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (/app/node_modules/gensync/index.js:261:32)\n    at /app/node_modules/gensync/index.js:273:13\n    at async.call.result.err.err (/app/node_modules/gensync/index.js:223:11)\n    at /app/node_modules/gensync/index.js:189:28\n    at /app/node_modules/@babel/core/lib/gensync-utils/async.js:72:7\n    at /app/node_modules/gensync/index.js:113:33\n    at step (/app/node_modules/gensync/index.js:287:14)\n    at /app/node_modules/gensync/index.js:273:13\n    at async.call.result.err.err (/app/node_modules/gensync/index.js:223:11)");
 
 /***/ }),
 
@@ -38624,6 +38698,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_auth__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./error */ "./resources/js/store/error.js");
 /* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./message */ "./resources/js/store/message.js");
 
@@ -38634,7 +38709,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
+    auth: _auth__WEBPACK_IMPORTED_MODULE_2___default.a,
     error: _error__WEBPACK_IMPORTED_MODULE_3__["default"],
     message: _message__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
@@ -38742,8 +38817,8 @@ var UNPROCESSABLE_ENITITY = 422;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/snail/another/docker-laravel/backend/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/snail/another/docker-laravel/backend/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /app/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /app/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
