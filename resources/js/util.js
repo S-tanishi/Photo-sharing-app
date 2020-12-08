@@ -25,3 +25,4 @@ export const OK = 200
 export const CREATED = 201
 export const INRERNAL_SERVER_ERROR = 500
 export const UNPROCESSABLE_ENITITY = 422
+export const UNAUTHORIZED = 419
