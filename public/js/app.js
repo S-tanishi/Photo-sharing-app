@@ -1972,19 +1972,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  if (!(val === _util__WEBPACK_IMPORTED_MODULE_3__["INTERNAL_SERVER_EEROR"])) {
+                  if (!(val === INTERNAL_SERVER_EEROR)) {
                     _context.next = 4;
                     break;
                   }
 
                   _this.$router.push('/500');
 
-                  _context.next = 9;
+                  _context.next = 12;
                   break;
 
                 case 4:
                   if (!(val === _util__WEBPACK_IMPORTED_MODULE_3__["UNAUTHORIZED"])) {
-                    _context.next = 9;
+                    _context.next = 11;
                     break;
                   }
 
@@ -1998,7 +1998,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   _this.$router.push('/login');
 
-                case 9:
+                  _context.next = 12;
+                  break;
+
+                case 11:
+                  if (val === _util__WEBPACK_IMPORTED_MODULE_3__["NOT_FOUND"]) {
+                    _this.$router.push('/not-found');
+                  }
+
+                case 12:
                 case "end":
                   return _context.stop();
               }
