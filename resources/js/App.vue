@@ -17,7 +17,7 @@
 import Message from './components/Message.vue'
 import Navbar from '.components/Navbar.vue'
 import Footer from '.components/Footer.vue'
-import { INTERNAL_SERVER_ERROR } from './util'
+import { INTERNAL_SERVER_ERROR, INTERNAL_SERVER_EEROR, UNAUTHORIZED } from './util'
 
 export default {
     components: {
@@ -32,13 +32,21 @@ export default {
     },
     watch: {
         errorCode: {
-            handler (val) {
+            async handler (val) {
                 if (val === INTERNAL_SERVER_EEROR) {
                     this.$router.push('/500')
+                } else if (val === UNAUTHORIZED) {
+                    // トークンをリフレッシュ
+                    await axios.get('/api/refresh-token')
+                    // ストアのuserをクリア
+                    this.$store.commit('auth/setUser', null)
+                    // ログイン画面へ
+                    this.$router.push('/login')
                 }
-            }
+            },
+            immediate: true
         },
-        immediate: true
+        
     },
     $route () {
         this.$store.commit('/error/setCode', null)
