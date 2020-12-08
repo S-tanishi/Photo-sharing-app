@@ -2101,12 +2101,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
       type: Object,
       required: true
     }
+  },
+  like: function like() {
+    this.$emit('like', {
+      id: this.item.id,
+      liked: this.item.liked_by_user
+    });
   }
 });
 
@@ -21191,11 +21199,18 @@ var render = function() {
               "button",
               {
                 staticClass: "photo__action photo__action--like",
-                attrs: { title: "Like photo" }
+                class: { "photo__action--liked": _vm.item.liked_by_user },
+                attrs: { title: "Like photo" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.like($event)
+                  }
+                }
               },
               [
                 _c("i", { staticClass: "icon ion-md-heart" }),
-                _vm._v("12\n          ")
+                _vm._v(_vm._s(_vm.item.likes_count) + "\n          ")
               ]
             ),
             _vm._v(" "),
