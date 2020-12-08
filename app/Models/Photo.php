@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -34,6 +35,16 @@ class Photo extends Model
     public function comments()
     {
         return $this->hasMany('App\Comment')->orderBy('id', 'desc');
+    }
+
+    /**
+     * 多:多 - likesテーブル
+     * @return BelongsToMany
+     */
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany('App\User', 'likes')
+            ->withTimestamps();
     }
 
     /**
