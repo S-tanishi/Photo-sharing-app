@@ -21,7 +21,14 @@ import Pagination from '../components/Pagination.vue'
 export default {
     components: {
         Photo,
-        Pagination,
+        Pagination
+    },
+    props: {
+        page: {
+            type: Number,
+            required: false,
+            default: 1
+        }
     },
     data () {
         return {
@@ -43,13 +50,6 @@ export default {
             this.currentPage = response.data.current_page
             this.lastPage = response.data.last_page
         },
-        watch: {
-            async handler () {
-                await this.fetchPhotos()
-            },
-            immediate: true
-        }, 
-
         onLikeClick({ id, liked }) {
             if (! this.$store.getters['auth/check']) {
               alert('いいね機能を使うにはログインしてください')
@@ -62,7 +62,6 @@ export default {
                 this.like(id)
             }
         },
-
         async like (id) {
             const response = await axios.put(`/api/photos/${id}/like`)
 
@@ -79,13 +78,29 @@ export default {
                 return photo
             })
         },
+        async unliked (id) {
+            const response = await axios.delete(`/api/photos/${id}/like`)
+
+            if (response.status !== OK) {
+                this.$store.commit('error/setCode', response.status)
+                return false
+            }
+
+            this.photos = thuis.photos.map(photo => {
+                if (photo,id === response.data.photo_id) {
+                    photo.likes_count -= 1
+                    photo.liked_by_user = false
+                }
+                return photo
+            })
+        },
     },
-    props: {
-        page: {
-            type: Number,
-            required: false,
-            default: 1
-        }
-    },
+    watch: {
+        async handler () {
+            await this.fetchPhotos()
+        },
+        immediate: true
+    }, 
+    
 }
 </script>
