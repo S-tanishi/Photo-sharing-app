@@ -22,7 +22,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photos = Photo::with(['owner'])
+        $photos = Photo::with(['owner', 'likes'])
            ->orderBy(Photo::CREATED_AT, 'desc')->paginate();
 
         return $photos;
@@ -35,7 +35,7 @@ class PhotoController extends Controller
      */
     public function show(string $id)
     {
-        $photo = Photo::where('id', $id)->with(['owner', 'comment.author'])->first();
+        $photo = Photo::where('id', $id)->with(['owner', 'comment.author', 'like'])->first();
 
         return $photo ?? abort(404);
     }
