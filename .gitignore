@@ -13,3 +13,6 @@ yarn-error.log
 
 # IDE除外
 .idea
+
+# DBデータ除外
+.docker/db/*
