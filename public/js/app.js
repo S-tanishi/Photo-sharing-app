@@ -2378,6 +2378,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2485,27 +2491,111 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    onLikeClick: function onLikeClick() {
+      if (!this.isLogin) {
+        alert('いいね機能を使う場合にはログインしてください');
+        return false;
+      }
+
+      if (this.photo.liked_by_user) {
+        this.unlike();
+      } else {
+        this.like();
+      }
+    },
+    like: function like() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.put("/api/photo/".concat(_this3.id, "/like"));
+
+              case 2:
+                response = _context3.sent;
+
+                if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                _this3.$store.commit('error/setCode', response.status);
+
+                return _context3.abrupt("return", false);
+
+              case 6:
+                _this3.photo.likes_count = _this3.photo.likes_count + 1;
+                _this3.photo.liked_by_user = true;
+
+              case 8:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    unlike: function unlike() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios["delete"]("/api/photos/".concat(_this4.id, "/like"));
+
+              case 2:
+                response = _context4.sent;
+
+                if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                _this4.$store.commit('error/setCode', response.status);
+
+                return _context4.abrupt("return", false);
+
+              case 6:
+                _this4.photo.likes_count = _this4.photo.likes_count - 1;
+                _this4.photo.liked_by_user = false;
+
+              case 8:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   },
   watch: {
     $route: {
       handler: function handler() {
-        var _this3 = this;
+        var _this5 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context5.prev = _context5.next) {
                 case 0:
-                  _context3.next = 2;
-                  return _this3.fetchPhoto();
+                  _context5.next = 2;
+                  return _this5.fetchPhoto();
 
                 case 2:
                 case "end":
-                  return _context3.stop();
+                  return _context5.stop();
               }
             }
-          }, _callee3);
+          }, _callee5);
         }))();
       },
       immediate: true
