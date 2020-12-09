@@ -21,7 +21,7 @@
                     <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
                   </ul>
                   <ul v-if="loginErrors.password">
-                    <li= v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
+                    <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
                   </ul>
                 </div>
 
@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
     data () {
         return {

@@ -66,12 +66,11 @@
 
 <script>
 import Photo from '../components/Photo.vue'
-import { OK,CREATED, UNPROCESSABLE_ENITITY } from '../util'
+import { OK, CREATED, UNPROCESSABLE_ENITITY } from '../util'
 
 export default {
     props: {
-        
-        Photoid: {
+        id: {
             type: String,
             required: true
         }
