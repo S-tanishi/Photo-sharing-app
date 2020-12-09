@@ -7,8 +7,8 @@ import Login from './pages/Login.vue'
 import SystemError from './pages/errors/System.vue'
 import PhotoDetail from './pages/PhotoDetail.vue'
 import NotFound from './pages/errors/NotFound.vue'
-import { component } from 'vue/types/umd'
-import { Store } from 'vuex'
+
+import store from './store'
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどが使用可能に
