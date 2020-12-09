@@ -9,7 +9,7 @@
             <li 
               class="tab__item"
               :class="{'tab__item--active': tab === 2 }"
-              @click="tab =2">Register
+              @click="tab = 2">Register
             </li>
         </ul>
         <!-- login-form -->
@@ -93,21 +93,29 @@ export default {
 
     methods: {
         async login () {
-            console.log(this.loginForm)
+            // authストアのloginアクションを呼び出す
+            await this.$store.dispatch('auth/login', this.loginForm)
+
+            if (this.apiStatus) {
+                // トップページに移動する
+                this.$router.push('/')
+            }
         },
         async register () {
-          //authストアのloginアクションを呼び出す
-          await this.$store.dispatch('auth/login', this.loginForm)
+            await this.$store.dispatch('auth/login', this.loginForm)
 
-          if (this.apiStatus) {
-            // トップページに移動する
-            this.$router.push('/')
-          }
+            if (this.apiStatus) {
+
+                this.$router.push('/')
+            }
         },
         clearError () {
           this.$store.commit('auth/setLoginErrorMessages', null)
           this.$store.commit('auth/setRegisterErrorMessages', null)
         }
     },
+    created () {
+        this.clearError()
+    }
 }
 </script>

@@ -2296,9 +2296,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this.loginForm);
+                _context.next = 2;
+                return _this.$store.dispatch('auth/login', _this.loginForm);
 
-              case 1:
+              case 2:
+                if (_this.apiStatus) {
+                  // トップページに移動する
+                  _this.$router.push('/');
+                }
+
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -2319,7 +2326,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 if (_this2.apiStatus) {
-                  // トップページに移動する
                   _this2.$router.push('/');
                 }
 
@@ -2335,6 +2341,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$store.commit('auth/setLoginErrorMessages', null);
       this.$store.commit('auth/setRegisterErrorMessages', null);
     }
+  },
+  created: function created() {
+    this.clearError();
   }
 });
 
