@@ -1,11 +1,9 @@
 import Axios from "axios"
-import { OK } from '../util'
-import { OK, UNPROCESSABLE_ENTITY } from '../util'
+import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
 
 const state = {
     user: null,
-    // API 呼び出しが成功したか失敗したかを表す
-    apiStatus: null,
+    apiStatus: null, // API 呼び出しが成功したか失敗したかを表す
     loginErrorMessages: null,
     registerErrorMessages: null,
 }
@@ -35,7 +33,7 @@ const mutations = {
 const actions = {
     // 会員登録
     async register (context, data) {
-        context.commit('seyApiStatus', null)
+        context.commit('setApiStatus', null)
         const response = await axios.post('/api/register',data)
         
         if (response.status === CREATED) {
@@ -53,7 +51,7 @@ const actions = {
         
     },
     // ログイン
-    async login (content, data) {
+    async login (context, data) {
         context.commit('setApiStatus', null)
         // 通信エラーの取得
         const response = await axios.post('/api/login', data)
