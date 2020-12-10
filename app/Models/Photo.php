@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Photo extends Model
 {
+    use HasFactory;
     /** プライマリキーの型 */
     protected $keyType = 'string';
 
