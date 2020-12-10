@@ -26,7 +26,7 @@ class PhotoFactory extends Factory
     {
         return [
             'id' => Str::random(12),
-            'user_id' => fn() => factory(App\models\User::class)->create()->id,
+            'user_id' => fn() => User::factory()->create()->id,
             'filename' => Str::random(12) . '.jpg',
             'created_at' => $faker->dateTime(),
             'updated_at' => $faker->dateTime(),
