@@ -25,17 +25,15 @@ class PhotoFactory extends Factory
     public function definition()
     {
         return [
-            //
-        ];
-    }
-    $factory->define(App\Models\Photo::class, function (Faker $faker) {
-        return [
             'id' => Str::random(12),
-            'user_id' => fn() => factory(App\User::class)->create()->id,
+            'user_id' => fn() => factory(App\models\User::class)->create()->id,
             'filename' => Str::random(12) . '.jpg',
             'created_at' => $faker->dateTime(),
             'updated_at' => $faker->dateTime(),
         ];
+    }
+    
+        
 
-    });
+    
 }
