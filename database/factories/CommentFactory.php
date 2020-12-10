@@ -3,8 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Model;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Generator;
+use Faker\Generator as Faker;
 
 class CommentFactory extends Factory
 {
@@ -23,14 +24,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'content' => substr($faker->text, 0, 500),
+            'user_id' => fn() => User::factory()->create()->id,
         ];
     }
-
-    $factory->define(App\Comment::class, function (Faker $faker) {
-        return [
-            'content' => substr($faker->text, 0, 500),
-            'user_id' => fn() =>factory(App\User::class->create()->id,
-        ];
-    });
 }
